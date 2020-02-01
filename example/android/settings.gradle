@@ -1,0 +1,5 @@
+rootProject.name = 'example'
+include ':react-native-cupertino-progress'
+project(':react-native-cupertino-progress').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cupertino-progress/android')
+
+include ':app'
