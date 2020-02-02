@@ -1,23 +1,26 @@
 {
   "name": "react-native-cupertino-progress",
   "title": "React Native Cupertino Progress",
-  "version": "1.0.0",
-  "description": "TODO",
+  "version": "0.0.1",
+  "description": "ios13 progress component",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-cupertino-progress.git",
-    "baseUrl": "https://github.com/github_account/react-native-cupertino-progress"
+    "url": "git+https://github.com/obzone/react-native-cupertino-progress.git",
+    "baseUrl": "https://github.com/obzone/react-native-cupertino-progress"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "progress",
+    "ios",
+    "slider"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "shaoyecheng",
+    "email": "shaoyecheng@live.cn"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
@@ -32,6 +35,7 @@
   },
   "files": [
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "README.md"
   ]
 }
