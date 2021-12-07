@@ -1,20 +1,19 @@
 {
-  "name": "react-native-cupertino-progress",
-  "title": "React Native Cupertino Progress",
+  "name": "react-native-cupertino-slider",
+  "title": "React Native Cupertino slider",
   "version": "0.0.1",
-  "description": "ios13 progress component",
+  "description": "ios13 slider component",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/obzone/react-native-cupertino-progress.git",
-    "baseUrl": "https://github.com/obzone/react-native-cupertino-progress"
+    "url": "git+https://github.com/obzone/react-native-cupertino-slider.git",
+    "baseUrl": "https://github.com/obzone/react-native-cupertino-slider"
   },
   "keywords": [
     "react-native",
-    "progress",
     "ios",
     "slider"
   ],
