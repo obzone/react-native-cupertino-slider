@@ -7,14 +7,14 @@
 import * as React from "react";
 import * as ReactNative from "react-native";
 
-export interface CupertinoProgressProps {
-  onSlidingComplete?: (value: number) => void 
-  onValueChange?: (value: number) => void 
+export interface CupertinoSliderProps {
+  onSlidingComplete?: (value: number) => void
+  onValueChange?: (value: number) => void
   progress?: number
   size?: number
   magnification?: number
-  color?: string 
+  color?: string
   style?: ReactNative.StyleProp<ReactNative.ViewStyle>
 }
 
-export default class CupertinoProgress extends React.PureComponent<CupertinoProgressProps> {}
+export default class CupertinoSlider extends React.PureComponent<CupertinoSliderProps> { }

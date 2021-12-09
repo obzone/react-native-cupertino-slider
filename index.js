@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 
-export default class ProgressComponent extends React.PureComponent {
+export default class SliderComponent extends React.PureComponent {
 	constructor(props) {
 		super(props)
 
@@ -20,21 +20,21 @@ export default class ProgressComponent extends React.PureComponent {
 		if (this.props.horizontal) {
 			if (this.props.onValueChange) {
 				animatedConfig = {
-					listener: ({nativeEvent: { locationX, locationY }}) => {
+					listener: ({ nativeEvent: { locationX, locationY } }) => {
 						locationX + this._movingLocationOffset > this.state.viewWidth ? this.props.onValueChange(100) : locationX + this._movingLocationOffset < 0 ? this.props.onValueChange(0) : this.props.onValueChange((locationX + this._movingLocationOffset) * 100 / this.state.viewWidth)
 					}
 				}
 			}
-			this._onResponderMove = Animated.event([{nativeEvent: { locationX: this.state.movingLocation }}], animatedConfig)
+			this._onResponderMove = Animated.event([{ nativeEvent: { locationX: this.state.movingLocation } }], animatedConfig)
 		} else {
 			if (this.props.onValueChange) {
 				animatedConfig = {
-					listener: ({nativeEvent: { locationX, locationY }}) => {
+					listener: ({ nativeEvent: { locationX, locationY } }) => {
 						locationY + this._movingLocationOffset > this.state.viewHeight ? this.props.onValueChange(0) : locationY + this._movingLocationOffset < 0 ? this.props.onValueChange(100) : this.props.onValueChange((this.state.viewHeight - locationY - this._movingLocationOffset) * 100 / this.state.viewHeight)
 					}
 				}
 			}
-			this._onResponderMove = Animated.event([{nativeEvent: { locationY: this.state.movingLocation }}], animatedConfig)
+			this._onResponderMove = Animated.event([{ nativeEvent: { locationY: this.state.movingLocation } }], animatedConfig)
 		}
 	}
 
@@ -42,7 +42,11 @@ export default class ProgressComponent extends React.PureComponent {
 		return true
 	}
 
-	_onResponderGrant = ({nativeEvent: { locationX, locationY }}) => {
+	_onStartShouldSetResponder = () => {
+		return true
+	}
+
+	_onResponderGrant = ({ nativeEvent: { locationX, locationY } }) => {
 		if (this.props.horizontal) {
 			this._movingLocationOffset = this._latestmovingLocation - locationX
 		} else {
@@ -57,7 +61,7 @@ export default class ProgressComponent extends React.PureComponent {
 		console.log('_onResponderReject')
 	}
 
-	_onResponderRelease = ({nativeEvent: { locationX, locationY }}) => {
+	_onResponderRelease = ({ nativeEvent: { locationX, locationY } }) => {
 		if (this.props.horizontal) {
 			if (this.props.onSlidingComplete) {
 				locationX + this._movingLocationOffset > this.state.viewWidth ? this.props.onSlidingComplete(100) : locationX + this._movingLocationOffset < 0 ? this.props.onSlidingComplete(0) : this.props.onSlidingComplete((locationX + this._movingLocationOffset) * 100 / this.state.viewWidth)
@@ -86,8 +90,8 @@ export default class ProgressComponent extends React.PureComponent {
 		}).start()
 	}
 
-	_onLayout = ({nativeEvent: { layout: {width, height}}}) => {
-		this.setState({viewHeight: height, viewWidth: width})
+	_onLayout = ({ nativeEvent: { layout: { width, height } } }) => {
+		this.setState({ viewHeight: height, viewWidth: width })
 	}
 
 	render() {
@@ -102,50 +106,50 @@ export default class ProgressComponent extends React.PureComponent {
 				outputRange: [0, 0.1, this.state.viewHeight - 0.1, this.state.viewHeight]
 			})
 		}
-		const containerViewStyle = 
+		const containerViewStyle =
 		{
-			flex: 1, 
-			height: this.props.magnification , 
-			width: undefined, 
-			justifyContent: 'center', 
+			flex: 1,
+			height: this.props.magnification,
+			width: undefined,
+			justifyContent: 'center',
 		}
 		const animatedContainerViewStyle = this.props.horizontal ?
-		{
-			height: this.state.size, 
-			width: undefined, 
-			backgroundColor: this.props.style.backgroundColor || '#F5F5F5', 
-			overflow: 'hidden', 
-			borderRadius: 10, 
-			borderColor: this.props.style.backgroundColor || '#F5F5F5', 
-			borderWidth: 1
-		} : 
-		{
-			width: this.state.size, 
-			overflow: 'hidden', 
-			borderRadius: 10, 
-			borderColor: this.props.style.backgroundColor || '#F5F5F5', 
-      borderWidth: 1,
-      backgroundColor: this.props.color || '#8F4398',
-      flex: 1,
-		}
+			{
+				height: this.state.size,
+				width: undefined,
+				backgroundColor: this.props.style.backgroundColor || '#F5F5F5',
+				overflow: 'hidden',
+				borderRadius: 10,
+				borderColor: this.props.style.backgroundColor || '#F5F5F5',
+				borderWidth: 1
+			} :
+			{
+				width: this.state.size,
+				overflow: 'hidden',
+				borderRadius: 10,
+				borderColor: this.props.style.backgroundColor || '#F5F5F5',
+				borderWidth: 1,
+				backgroundColor: this.props.color || '#8F4398',
+				flex: 1,
+			}
 
 		const animatedViewStyle = this.props.horizontal ?
-		{
-			position: 'relative', 
-			height: this.state.size, 
-			width: this._ProgressBarLength, 
-			backgroundColor: this.props.color || '#8F4398'
-		} : 
-		{
-      position: 'relative', 
-			height: this._ProgressBarLength, 
-			width: this.state.size, 
-      backgroundColor: this.props.style.backgroundColor || '#F5F5F5', 
-		}
+			{
+				position: 'relative',
+				height: this.state.size,
+				width: this._ProgressBarLength,
+				backgroundColor: this.props.color || '#8F4398'
+			} :
+			{
+				position: 'relative',
+				height: this._ProgressBarLength,
+				width: this.state.size,
+				backgroundColor: this.props.style.backgroundColor || '#F5F5F5',
+			}
 
 		return (
 			<View onLayout={this._onLayout} style={containerViewStyle} >
-				<Animated.View onResponderRelease={this._onResponderRelease} onMoveShouldSetResponder={this._onMoveShouldSetResponder} onResponderGrant={this._onResponderGrant} onResponderReject={this._onResponderReject} onResponderMove={this._onResponderMove} style={animatedContainerViewStyle} >
+				<Animated.View onResponderRelease={this._onResponderRelease} onStartShouldSetResponder={this._onStartShouldSetResponder} onMoveShouldSetResponder={this._onMoveShouldSetResponder} onResponderGrant={this._onResponderGrant} onResponderReject={this._onResponderReject} onResponderMove={this._onResponderMove} style={animatedContainerViewStyle} >
 					<Animated.View style={animatedViewStyle} />
 				</Animated.View>
 			</View>
